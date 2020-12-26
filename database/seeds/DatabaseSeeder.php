@@ -16,9 +16,9 @@ class DatabaseSeeder extends Seeder
         $now = Carbon::now()->toDateTimeString();
 
         Role::insert([
-            ['name' => 'doctor', 'created_at' => $now, 'updated_at' => $now],
-            ['name' => 'admin', 'created_at' => $now, 'updated_at' => $now],
-            ['name' => 'patient', 'created_at' => $now, 'updated_at' => $now],
+            ['name' => 'Doctor', 'created_at' => $now, 'updated_at' => $now],
+            ['name' => 'Admin', 'created_at' => $now, 'updated_at' => $now],
+            ['name' => 'Patient', 'created_at' => $now, 'updated_at' => $now],
         ]);
         // $this->call(UsersTableSeeder::class);
     }

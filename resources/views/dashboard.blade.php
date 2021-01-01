@@ -1,5 +1,4 @@
-@extends('admin.layouts.main')
-
-@section('content')
-    @include('admin.layouts.content')
-@endsection
+@include('admin.layouts.header')
+@include('admin.layouts.sidebar')
+@include('admin.layouts.content')
+@include('admin.layouts.footer')

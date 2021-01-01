@@ -116,6 +116,16 @@
 <script src="{{ asset('admin/js/widgets.js') }}"></script>
 <script src="{{ asset('admin/js/charts.js') }}"></script>
 <script src="{{ asset('admin/dist/js/theme.min.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+        $("#datepicker").datetimepicker({
+            format: 'YYYY-MM-DD'
+        })
+    })
+</script>
+
+
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <script>
 (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=

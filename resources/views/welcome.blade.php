@@ -17,17 +17,18 @@
             cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
             proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
             <div class="mt-5">
-            <button class="btn btn-success">Register as Patient</button>
-            <button class="btn btn-secondary">Login</button>
+            <a href="{{ url('/register') }}"><button class="btn btn-success">Register as Patient</button></a>
+            <a href="{{ url('/login') }}"><button class="btn btn-secondary">Login</button></a>
         </div>
         </div>
         
     </div>
     <hr>
     <section class="">
-        <div class="card">
-            <div class="card-body">
-                <div class="card-header">Find Doctors</div>
+        <form action="{{ url('/') }}" method="get">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-header">Find Doctors</div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-8">
@@ -40,8 +41,9 @@
                     </div> 
                 </div>
             </div>
+        </form>
 
-            <div class="card mt-1">
+        <div class="card mt-1">
             <div class="card-header"> Doctors available today</div>
                 <div class="card-body">
 
@@ -51,41 +53,31 @@
                           <th scope="col">#</th>
                           <th scope="col">Photo</th>
                           <th scope="col">Name</th>
-                          <th scope="col">Category</th>
+                          <th scope="col">Specialization</th>
                           <th></th>
                         </tr>
                       </thead>
                       <tbody>
-                        
-                        <tr>
-                          <th scope="row">1</th>
-                          <td><img src="{{ asset('/doctors/doctor.png') }}" width="80" style="border-radius: 50%;">
-                          </td>
-                          <td>the Bird</td>
-                          <td>@twitter</td>
-                        <td>
-                            <button class="btn btn-success">Book Appointment</button>
-                        </td>
-                        </tr>
-
-                         <tr>
-                          <th scope="row">1</th>
-                          <td><img src="{{ asset('/doctors/doctor.png') }}" width="80" style="border-radius: 50%;">
-                          </td>
-                          <td>the Bird</td>
-                          <td>@twitter</td>
-                        <td>
-                            <button class="btn btn-success">Book Appointment</button>
-                        </td>
-                        </tr>
-
-
+                        @forelse ($appointments as $appointment)
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>
+                                    <img src="{{ asset('images') }}/{{ $appointment->doctor->image }}" width="80" style="border-radius: 50%;">
+                                </td>
+                                <td>{{ $appointment->doctor->name }}</td>
+                                <td>{{ $appointment->doctor->department }}</td>
+                                <td>
+                                    <a href="{{ route('create.appointment', ['doctor' => $appointment->user_id, 'date' => $appointment->date]) }}">
+                                        <button class="btn btn-success">Book Appointment</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        @empty
+                            <td>No Doctors Available Today</td>
+                        @endforelse
                       </tbody>
                     </table>
-
-                    
-                </div>
-                
+                </div>              
             </div>
         </div>
     </section>

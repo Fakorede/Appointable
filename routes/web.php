@@ -3,13 +3,11 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FrontendController@index');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
+Route::get('/new-appointment/{doctor}/{date}', 'FrontendController@show')->name('create.appointment');
+
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 Auth::routes();
 

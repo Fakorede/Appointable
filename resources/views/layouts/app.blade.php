@@ -44,13 +44,11 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        @auth
-                        @if (auth()->user()->role->name == 'Patient')
+                        @if (auth()->check() && auth()->user()->role->name == 'Patient')
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('my.bookings') }}">{{ __('My Bookings') }}</a>
                             </li>
                         @endif
-                        @endauth
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -66,8 +64,16 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
-
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @if (auth()->check() && auth()->user()->role->name == 'Patient')
+                                    <a class="dropdown-item" href="{{ route('profile') }}">
+                                        {{ __('Profile') }}
+                                    </a>
+                                    @else
+                                        <a class="dropdown-item" href="{{ route('dashboard') }}">
+                                            {{ __('Dashboard') }}
+                                        </a>
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

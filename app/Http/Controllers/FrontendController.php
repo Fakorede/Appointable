@@ -37,6 +37,10 @@ class FrontendController extends Controller
             'time' => 'required',
         ]);
 
+        if ($this->checkBookingTimeInterval()) {
+            return redirect()->back()->with('error_message', 'You already made an appointment!');
+        }
+
         Booking::create([
             'user_id' => auth()->id(),
             'doctor_id' => $request->doctorId,
@@ -51,9 +55,17 @@ class FrontendController extends Controller
         return redirect()->back()->with('message', 'Your appointment has been booked!');
     }
 
-    public function findAvailableDoctors($date)
+    private function findAvailableDoctors($date)
     {
         $doctors = Appointment::where('date', $date)->get();
         return $doctors;
+    }
+
+    private function checkBookingTimeInterval()
+    {
+        return Booking::latest()
+            ->where('user_id', auth()->id())
+            ->whereDate('created_at', date('Y-m-d'))
+            ->exists();
     }
 }

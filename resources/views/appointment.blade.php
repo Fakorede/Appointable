@@ -24,6 +24,11 @@
                     {{ Session::get('message') }}
                 </div>
             @endif
+            @if (Session::has('error_message'))
+                <div class="alert alert-warning">
+                    {{ Session::get('error_message') }}
+                </div>
+            @endif
             <form action="{{ route('store.appointment') }}" method="post">
                 @csrf
                 <div class="card">

@@ -24,62 +24,8 @@
         
     </div>
     <hr>
-    <section class="">
-        <form action="{{ url('/') }}" method="get">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-header">Find Doctors</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="datepicker" name="date">
-                            </div>
-                            <div class="col-sm-4">
-                                <button class="btn btn-primary">Find Doctors</button>
-                            </div>
-                        </div>
-                    </div> 
-                </div>
-            </div>
-        </form>
 
-        <div class="card mt-1">
-            <div class="card-header"> Doctors available today</div>
-                <div class="card-body">
-
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Photo</th>
-                          <th scope="col">Name</th>
-                          <th scope="col">Specialization</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @forelse ($appointments as $appointment)
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>
-                                    <img src="{{ asset('images') }}/{{ $appointment->doctor->image }}" width="80" style="border-radius: 50%;">
-                                </td>
-                                <td>{{ $appointment->doctor->name }}</td>
-                                <td>{{ $appointment->doctor->department }}</td>
-                                <td>
-                                    <a href="{{ route('show.appointment', ['doctor' => $appointment->user_id, 'date' => $appointment->date]) }}">
-                                        <button class="btn btn-success">Book Appointment</button>
-                                    </a>
-                                </td>
-                            </tr>
-                        @empty
-                            <td>No Doctors Available Today</td>
-                        @endforelse
-                      </tbody>
-                    </table>
-                </div>              
-            </div>
-        </div>
-    </section>
+    <find-doctors />
+    
 </div>      
 @endsection

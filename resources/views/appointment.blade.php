@@ -55,7 +55,6 @@
                             <p>Kindly login to book an appointment.</p>
                             <a href="{{ url('/login') }}" class="btn btn-primary">Login</a>
                         @endauth
-                        {{-- <button type="submit" class="btn btn-success" style="width: 100%">Book Appointment</button> --}}
                     </div>
                 </div>
             </form>

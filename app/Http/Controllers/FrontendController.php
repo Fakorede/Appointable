@@ -19,7 +19,7 @@ class FrontendController extends Controller
             return view('welcome', compact('appointments'));
         }
 
-        $date = '2020-12-30'; //date('Y-m-d')
+        $date = date('Y-m-d');
 
         $appointments = Appointment::where('date', $date)->get();
         return view('welcome', compact('appointments'));
@@ -77,6 +77,18 @@ class FrontendController extends Controller
         return view('booking.index', compact('appointments'));
     }
 
+    public function availableDoctors(Request $request)
+    {
+        return Appointment::with('doctor')->whereDate('date', date('Y-m-d'))
+            ->get();
+    }
+
+    public function findDoctors(Request $request)
+    {
+        return Appointment::with('doctor')->whereDate('date', $request->date)
+            ->get();
+    }
+
     private function sendEmailNotification($data)
     {
         try {
@@ -88,8 +100,7 @@ class FrontendController extends Controller
 
     private function findAvailableDoctors($date)
     {
-        $doctors = Appointment::where('date', $date)->get();
-        return $doctors;
+        return Appointment::where('date', $date)->get();
     }
 
     private function checkBookingTimeInterval()

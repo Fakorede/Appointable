@@ -13,6 +13,9 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('doctor', 'DoctorController');
+    Route::get('/patients', 'PatientController@index')->name('bookings.today');
+    Route::get('/patients/all', 'PatientController@allBookings')->name('bookings.all');
+    Route::get('/update/{id}/status', 'PatientController@updateStatus')->name('update.status');
 });
 
 Route::group(['middleware' => ['auth', 'doctor']], function () {

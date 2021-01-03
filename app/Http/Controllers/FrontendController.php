@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Appointment;
+use App\Booking;
 use App\Time;
 use App\User;
+use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
@@ -21,12 +23,32 @@ class FrontendController extends Controller
         return view('welcome', compact('appointments'));
     }
 
-    public function show(User $doctor, $date)
+    public function showAppointment(User $doctor, $date)
     {
         $appointment = Appointment::where('user_id', $doctor->id)->where('date', $date)->first();
         $times = Time::where('appointment_id', $appointment->id)->where('status', 0)->get();
 
-        return view('appointment', compact('doctor', 'appointment', 'times', 'date'));
+        return view('appointment', compact('doctor', 'times', 'date'));
+    }
+
+    public function storeAppointment(Request $request)
+    {
+        $this->validate($request, [
+            'time' => 'required',
+        ]);
+
+        Booking::create([
+            'user_id' => auth()->id(),
+            'doctor_id' => $request->doctorId,
+            'time' => $request->time,
+            'date' => $request->date,
+        ]);
+
+        Time::where('appointment_id', $request->appointmentId)
+            ->where('time', $request->time)
+            ->update(['status' => 1]);
+
+        return redirect()->back()->with('message', 'Your appointment has been booked!');
     }
 
     public function findAvailableDoctors($date)

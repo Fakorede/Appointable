@@ -67,7 +67,7 @@
                                 <td>{{ $appointment->doctor->name }}</td>
                                 <td>{{ $appointment->doctor->department }}</td>
                                 <td>
-                                    <a href="{{ route('create.appointment', ['doctor' => $appointment->user_id, 'date' => $appointment->date]) }}">
+                                    <a href="{{ route('show.appointment', ['doctor' => $appointment->user_id, 'date' => $appointment->date]) }}">
                                         <button class="btn btn-success">Book Appointment</button>
                                     </a>
                                 </td>

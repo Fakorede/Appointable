@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'FrontendController@index');
 
-Route::get('/new-appointment/{doctor}/{date}', 'FrontendController@show')->name('create.appointment');
+Route::get('/new-appointment/{doctor}/{date}', 'FrontendController@showAppointment')->name('show.appointment');
+
+Route::post('/book/appointment', 'FrontendController@storeAppointment')->name('store.appointment')->middleware('auth');
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 

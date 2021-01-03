@@ -12,4 +12,9 @@ class Booking extends Model
      * @var array
      */
     protected $guarded = ['id'];
+
+    public function doctor()
+    {
+        return $this->belongsTo(User::class, 'doctor_id');
+    }
 }

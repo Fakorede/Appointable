@@ -7,6 +7,8 @@ Route::get('/', 'FrontendController@index');
 
 Route::get('/new-appointment/{doctor}/{date}', 'FrontendController@showAppointment')->name('show.appointment');
 
+Route::get('my-bookings', 'FrontendController@myBookings')->name('my.bookings')->middleware('auth');
+
 Route::post('/book/appointment', 'FrontendController@storeAppointment')->name('store.appointment')->middleware('auth');
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');

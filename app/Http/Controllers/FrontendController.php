@@ -68,6 +68,15 @@ class FrontendController extends Controller
         return redirect()->back()->with('message', 'Your appointment has been booked!');
     }
 
+    public function myBookings()
+    {
+        $appointments = Booking::latest()
+            ->where('user_id', auth()->id())
+            ->get();
+
+        return view('booking.index', compact('appointments'));
+    }
+
     private function sendEmailNotification($data)
     {
         try {

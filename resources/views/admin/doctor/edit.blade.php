@@ -125,8 +125,8 @@
                     <div class="form-group">
                         <label for="">Specialist</label>
                         <select name="department" class="form-control @error('department') is-invalid @enderror" id="department">
-                            @foreach (['Cardiologist', 'Family Physician', 'Opthamologist', 'Neurologist'] as $department)
-                                <option value="{{ $department }}" @if($user->department == $department) selected @endif>{{ $department }}</option>
+                            @foreach (App\Department::all() as $department)
+                                <option value="{{ $department->department }}" @if($user->department == $department->department) selected @endif>{{ $department->department }}</option>
                             @endforeach
                         </select>
                         @error('department')

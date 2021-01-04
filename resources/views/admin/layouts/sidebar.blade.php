@@ -20,6 +20,15 @@
                     </div>
                     @if (auth()->check() && auth()->user()->role->name == 'Admin')
                     <div class="nav-item has-sub">
+                        <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Departments</span> <span class="badge badge-danger"></span></a>
+                        <div class="submenu-content">
+                            <a href="{{ route('department.create') }}" class="menu-item">Create</a>
+                            <a href="{{ route('department.index') }}" class="menu-item">View</a>
+                        </div>
+                    </div>
+                    @endif
+                    @if (auth()->check() && auth()->user()->role->name == 'Admin')
+                    <div class="nav-item has-sub">
                         <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Doctors</span> <span class="badge badge-danger"></span></a>
                         <div class="submenu-content">
                             <a href="{{ route('doctor.create') }}" class="menu-item">Create</a>

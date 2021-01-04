@@ -12,6 +12,7 @@ Route::get('/new-appointment/{doctor}/{date}', 'FrontendController@showAppointme
 Auth::routes();
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::resource('department', 'DepartmentController');
     Route::resource('doctor', 'DoctorController');
     Route::get('/patients', 'PatientController@index')->name('bookings.today');
     Route::get('/patients/all', 'PatientController@allBookings')->name('bookings.all');

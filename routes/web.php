@@ -22,10 +22,15 @@ Route::group(['middleware' => ['auth', 'doctor']], function () {
     Route::resource('appointment', 'AppointmentController');
     Route::post('appointment/check', 'AppointmentController@check')->name('appointment.check');
     Route::post('appointment/update', 'AppointmentController@updateTime')->name('appointment.update');
+    Route::get('prescription/today', 'PrescriptionController@index')->name('prescription.today');
+    Route::get('prescription/all', 'PrescriptionController@allPresriptions')->name('prescription.all');
+    Route::get('/prescription/{userId}/{date}', 'PrescriptionController@show')->name('show.prescription');
+    Route::post('/prescription/store', 'PrescriptionController@store')->name('store.prescription');
 });
 
 Route::group(['middleware' => ['auth', 'patient']], function () {
     Route::get('/my-bookings', 'FrontendController@myBookings')->name('my.bookings');
+    Route::get('/my-prescriptions', 'PrescriptionController@myPrescriptions')->name('my.prescriptions');
     Route::post('/book/appointment', 'FrontendController@storeAppointment')->name('store.appointment');
     Route::get('/user/profile', 'ProfileController@index')->name('profile');
     Route::post('/profile/update', 'ProfileController@store')->name('store.profile');

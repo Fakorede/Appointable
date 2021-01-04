@@ -36,6 +36,15 @@
                         </div>
                     </div> 
                     @endif 
+                    @if (auth()->check() && auth()->user()->role->name == 'Doctor')
+                    <div class="nav-item has-sub">
+                        <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Prescriptions</span> <span class="badge badge-danger"></span></a>
+                        <div class="submenu-content">
+                            <a href="{{ route('prescription.today') }}" class="menu-item">Today</a>
+                            <a href="{{ route('prescription.all') }}" class="menu-item">All</a>
+                        </div>
+                    </div> 
+                    @endif 
                     @if (auth()->check() && auth()->user()->role->name == 'Admin')
                     <div class="nav-item has-sub">
                         <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Patient Bookings</span> <span class="badge badge-danger"></span></a>
@@ -45,6 +54,13 @@
                         </div>
                     </div>
                     @endif
+                    <div class="nav-item active">
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();"><i class="ik ik-power dropdown-icon"></i><span>Logout</span></a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
                 </nav>
             </div>
         </div>

@@ -48,6 +48,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('my.bookings') }}">{{ __('My Bookings') }}</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('my.prescriptions') }}">{{ __('My Prescriptions') }}</a>
+                            </li>
                         @endif
                         <!-- Authentication Links -->
                         @guest
@@ -66,6 +69,9 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     @if (auth()->check() && auth()->user()->role->name == 'Patient')
+                                    <a class="dropdown-item" href="{{ route('home') }}">
+                                        {{ __('Dashboard') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('profile') }}">
                                         {{ __('Profile') }}
                                     </a>

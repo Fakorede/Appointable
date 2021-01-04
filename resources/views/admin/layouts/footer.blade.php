@@ -117,6 +117,8 @@
 <script src="{{ asset('admin/js/charts.js') }}"></script>
 <script src="{{ asset('admin/dist/js/theme.min.js') }}"></script>
 
+<script src="{{ asset('js/app.js') }}"></script>
+
 <script>
     $(document).ready(function() {
         $("#datepicker").datetimepicker({
